@@ -1,0 +1,58 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta content="initial-scale=1.0, user-scalable=no,width=device-width" name="viewport"/>
+    <title>Magi</title>
+    <script type="text/javascript" src="core.js"></script>
+
+    <script type="text/javascript" src="core/LazyLoad.js"></script>
+    <script type="text/javascript" src="core/Cache.js"></script>
+    <script type="text/javascript" src="core/Historys.js"></script>
+    <script type="text/javascript" src="core/Scene.js"></script>
+    <script type="text/javascript" src="core/Magi.js"></script>
+    <style>
+        #ai{
+            max-width:500px;
+            height: 100%;
+            border: 1px solid red;
+            margin:0px auto
+        }
+    </style>
+</head>
+<body>
+<div id="ai"></div>
+</body>
+</html>
+<script>
+
+    var magi = new Magi({
+        app_id:"myApp", //唯一标识
+        scene_box:document.getElementById("ai") //app添加到当前页面的借点
+    }).startup();
+
+//        magi.history.clear();
+//        magi.history.write('index',"index",{});
+//        magi.history.write('index',"detail");
+//        magi.history.write('index',"new",{id:2});
+//   console.info( magi.history.lists());
+
+
+//   console.info(  magi.history.lists());
+//
+//        magi.LazyLoad.script('todo.js', function () {
+//            console.info(magi.LazyLoad.getLoadedScripts())
+//        });
+
+    //    var a = S.cache.set("t","a",300000000);
+    //    S.cache.remove("t");
+    //        var s= magi.Cache.val("t2","ii");
+
+    //     magi.LazyLoad.files(['todo.js','34.jpg'], function (complete,count) {
+    //        console.info(complete+'-'+count);
+    //    });
+
+    //    magi.LazyLoad.files(['34.jpg', '987.jpg', 'data.json'], function (complete, count) {
+    //        console.info(complete, count);
+    //    });
+</script>

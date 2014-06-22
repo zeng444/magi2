@@ -1,0 +1,300 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Core</title>
+    <script type="text/javascript" src="core.js"></script>
+    <style>
+        body {
+            font-size: 14px;
+            font-family: arial, sans-serif;
+        }
+
+        .exa {
+            padding: 10px 0px;
+            border-bottom: 1px solid #ccc;
+            margin: 3px 0px;
+        }
+    </style>
+</head>
+<body>
+<h1>CORE.JS 用例测试</h1>
+
+<h2>事件</h2>
+<div class="exa">
+    <span class="event">addEvent</span>
+    <script type="text/javascript">
+
+        function msg() {
+            alert("绑定addEvent的alert！");
+        }
+        (function ($) {
+
+            if ($(".event")) {
+                $.addEvent($(".event")[0], "click", msg);
+            }
+        })(S)
+    </script>
+</div>
+
+<div class="exa">
+    <span class="removeEvent">removeEvent</span>
+    <script>
+        (function ($) {
+            $.addEvent($(".removeEvent")[0], "click", function () {
+                $.removeEvent($(".event")[0], "click", msg);
+                alert("移除了addEvent的click事件")
+            });
+
+        })(S)
+    </script>
+
+</div>
+
+<h2>Dom</h2>
+<div class="exa">
+    <span class="last"></span>
+    <span class="getlast">dom.next获取下一个Dom</span>
+
+    <script type="text/javascript">
+
+        (function ($) {
+            $.addEvent($(".getlast")[0], "click", function () {
+                alert( $.dom.next( $(".last")[0]).innerHTML );
+            });
+        })(S)
+    </script>
+</div>
+
+<div class="exa">
+    <span class="getpre">dom.previous获取上一个Dom</span>
+    <span class="pre"></span>
+
+    <script type="text/javascript">
+
+        (function ($) {
+            $.addEvent($(".getpre")[0], "click", function () {
+                alert( $.dom.previous( $(".pre")[0]).innerHTML );
+            });
+        })(S)
+    </script>
+</div>
+
+
+<div class="exa">
+    <span class="getpre">dom.previous获取上一个Dom</span>
+    <span class="pre"></span>
+
+    <script type="text/javascript">
+
+        (function ($) {
+            $.addEvent($(".getpre")[0], "click", function () {
+                alert( $.dom.previous( $(".pre")[0]).innerHTML );
+            });
+        })(S)
+    </script>
+</div>
+
+<div class="exa" id="prependparent">
+    <span class="prepend">dom.prepend容器内前插入</span>
+    <span class="pre"></span>
+
+    <script type="text/javascript">
+
+        (function ($) {
+            $.addEvent($(".prepend")[0], "click", function () {
+                 var span = document.createElement("span");
+                span.style.color="red";
+                span.innerHTML="new span-";
+                 $.dom.prepend( $("#prependparent")[0],span) ;
+            });
+        })(S)
+    </script>
+</div>
+
+
+<h2>浏览器判断</h2>
+<div class="exa">
+    <span class="browser" onclick="alert( S.browser.isIe() )">browser.isIe();</span>
+</div>
+<div class="exa">
+    <span class="browser" onclick="alert( S.browser.isOpera() )">browser.isOpera();</span>
+</div>
+<div class="exa">
+    <span class="browser" onclick="alert( S.browser.isWebkit() )">browser.isWebkit();</span>
+</div>
+<div class="exa">
+    <span class="browser" onclick="alert( S.browser.isGecko() )">browser.isGecko();</span>
+</div>
+<div class="exa">
+    <span class="browser" onclick="alert( S.browser.kernel() )">browser.kernel();</span>
+</div>
+<div class="exa">
+
+    <span class="browser" onclick="alert( S.browser.brand.isSafari() )">browser.brand.isSafari();</span>
+</div>
+<div class="exa">
+    <span class="browser" onclick="alert( S.browser.brand.isChrome() )">browser.brand.isChrome();</span>
+</div>
+<div class="exa">
+    <span class="browser" onclick="alert( S.browser.brand.isFirefox() )">browser.brand.isFirefox();</span>
+</div>
+<div class="exa">
+    <span class="browser" onclick="alert( S.browser.brand.name() )">browser.brand.name();</span>
+</div>
+
+
+<h2>数据交互</h2>
+<div class="exa">
+    <span class="ajaxpost">ajax.post</span>
+    <script type="text/javascript">
+
+        (function ($) {
+            $.addEvent($(".ajaxpost")[0], "click", function () {
+                $.ajax.post('data.json', {params: Math.random()}, function (data) {
+                    alert(data);
+                });
+            });
+        })(S)
+    </script>
+</div>
+
+<div class="exa">
+    <span class="ajaxget">ajax.get</span>
+    <script type="text/javascript">
+
+        (function ($) {
+            $.addEvent($(".ajaxget")[0], "click", function () {
+                $.ajax.get('data.json', {params: Math.random()}, function (data) {
+                    alert(data);
+                });
+            });
+        })(S)
+    </script>
+</div>
+
+<div class="exa">
+    <span class="ajaxgetJson">ajax.getJson</span>
+    <script type="text/javascript">
+
+        (function ($) {
+            $.addEvent($(".ajaxgetJson")[0], "click", function () {
+                $.ajax.getJson('data.json', {params: Math.random()}, function (data) {
+                    alert("取得result.data数据："+data.result);
+                });
+            });
+        })(S)
+    </script>
+</div>
+
+<div class="exa">
+    <span class="ajaxgetJsonp">ajax.getJsonp</span>
+    <script type="text/javascript">
+
+        (function ($) {
+            $.addEvent($(".ajaxgetJsonp")[0], "click", function () {
+                $.ajax.jsonp('data.json', {params: Math.random()}, function (data) {
+                    alert("取得result.data数据："+data.result);
+                });
+            });
+        })(S)
+    </script>
+</div>
+
+<h2>Cookie数据操作</h2>
+<div class="exa">
+    <span class="cookieset">设置并读取cookie</span>
+    <script type="text/javascript">
+        (function ($) {
+            $.addEvent($(".cookieset")[0], "click", function () {
+                $.cookies.opt("cookie92","cece",{expires:60});
+                alert(  "cookie92："+$.cookies.opt("cookie92")+"\n时效：60分钟" );
+            });
+        })(S)
+    </script>
+</div>
+
+<div class="exa">
+    <span class="cookiedel">删除cookie</span>
+    <script type="text/javascript">
+        (function ($) {
+            $.addEvent($(".cookiedel")[0], "click", function () {
+                $.cookies.del("cookie92");
+                alert(  "cookie92："+$.cookies.opt("cookie92") );
+            });
+        })(S)
+    </script>
+</div>
+
+<h2>字符串处理</h2>
+<div class="exa">
+    <span class="trim">trim</span>
+    <script type="text/javascript">
+        (function ($) {
+            $.addEvent($(".trim")[0], "click", function () {
+              alert("处理前：“ sjsjsj ”\n处理后：“"+$.trim(" sjsjsj ")+"”")
+            });
+        })(S)
+    </script>
+</div>
+<div class="exa">
+    <span class="realLen">realLen</span>
+    <script type="text/javascript">
+        (function ($) {
+            $.addEvent($(".realLen")[0], "click", function () {
+                alert("字符串：“测试123”\n长度为：“"+$.len("测试123")+"”")
+            });
+        })(S)
+    </script>
+</div>
+
+
+<h2>动态效果</h2>
+<div class="exa">
+    <span class="transition">transition.play</span>
+    <script type="text/javascript">
+        (function ($) {
+            $.addEvent($(".transition")[0], "click", function (e) {
+               var div = document.createElement("div");
+                div.style.position = "absolute";
+                div.style.left= (e.X) ?e.X: e.clientX +"px";
+                div.style.top= (e.Y) ?e.Y : e.clientY+"px";
+                $("body")[0].appendChild(div)
+
+                $.transition.play(div,{
+                    width:["0px","200px"],
+                    height:["0px","200px"],
+                    background:["red","blue"]
+                },2000);
+            });
+        })(S)
+    </script>
+</div>
+
+
+<div class="exa">
+    <span class="animate">animate.play</span>
+    <script type="text/javascript">
+        (function ($) {
+            $.addEvent($(".animate")[0], "click", function (e) {
+                var div = document.createElement("div");
+                div.style.position = "absolute";
+                div.style.width="0px";
+                div.style.height="0px";
+                div.style.background="red";
+                div.style.left= (e.X) ?e.X: e.clientX +"px";
+                div.style.top= (e.Y) ?e.Y : e.clientY+"px";
+                $("body")[0].appendChild(div)
+
+                $.animate.play(function(pos){
+                    div.style.width = pos*100 +'px';
+                    div.style.height = pos*100 +'px';
+                },2000);
+            });
+        })(S)
+    </script>
+</div>
+
+</body>
+</html>
+

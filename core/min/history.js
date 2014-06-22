@@ -1,0 +1,2 @@
+/*! gruntjs.cn 2014-05-31 */
+var phistory=function(a){this.cache=new cache,this.key="magi_history",this.ticket=a,this.absolute=[];var b=this.cache.get(this.key+"_"+this.ticket);this.list=b?b:[],this.page_number=30};phistory.prototype.write=function(a,b,c){return this.list.length>=this.page_number&&this.remove(0),this.absolute=[a,b,c],this.list.push(this.absolute),this.cache.set(this.key+"_"+this.ticket,this.list),!0},phistory.prototype.remove=function(a){this.list.splice(a,1)},phistory.prototype.clear=function(){this.list=[]};

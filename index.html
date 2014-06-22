@@ -1,0 +1,76 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="magi framework" />
+<title>Magi</title>
+<meta content="initial-scale=1.0, user-scalable=no" name="viewport" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type="text/javascript" src="core.js"></script>
+<script type="text/javascript" src="core/playgroud.js" ></script>
+<script type="text/javascript" src="core/history.js" ></script>
+<script type="text/javascript" src="core/route.js" ></script>
+<script type="text/javascript" src="core/cache.js" ></script>
+<script type="text/javascript" src="core/magi2.js" ></script>
+<script type="text/javascript" src="core/lasyload.js" ></script>
+<style type="text/css">
+a{
+	text-decoration: none;
+	color: #000
+}
+</style>
+</head>
+<body>
+</body>
+</html>
+<script type="text/javascript">
+
+	var a = new magi({	
+		is_mvc:false,
+		controller_path:'magi/controller/',
+		module_path:'magi/model/',
+		view_path:'magi/themes/',
+		default_controller:'index',
+		default_action:'index', 
+		default_page_effection:'swipeleft',
+		// default_page_effection:'none',
+		default_query:{me:'56'},
+		allow_browser_url_change:true,
+		is_use_tpl_cache:true,
+		is_use_tpl_memcache:false,
+		tpl_rule:'{$class}.{$method}.php',
+		default_controller_construct:function(){
+			if(window._this_class!='startup'){
+				check_unique_file();
+			}
+		}
+		// app_playground_obj:$('#aa')[0],
+		// extend_utility:['app.config.js']
+	}).startup();
+	// console.info(a.history.list);
+	// console.info(a.history.absolute);
+	// magi.startup({	
+	// 	is_mvc:false,
+	// 	controller_path:'magi/controller/',
+	// 	module_path:'magi/model/',
+	// 	view_path:'magi/themes/',
+	// 	default_controller:'index',
+	// 	default_action:'index', 
+	// 	default_page_effection:'swipeleft',
+	// 	// default_page_effection:'none',
+	// 	default_query:{me:'56'},
+	// 	allow_browser_url_change:true,
+	// 	is_use_tpl_cache:true,
+	// 	is_use_tpl_memcache:false,
+	// 	tpl_rule:'{$class}.{$method}.php',
+	// 	default_controller_construct:function(){
+	// 		if(window._this_class!='startup'){
+	// 			check_unique_file();
+	// 		}
+	// 	}
+	// 	// app_playground_obj:$('#aa')[0],
+	// 	// extend_utility:['app.config.js']
+	// });
+</script>
