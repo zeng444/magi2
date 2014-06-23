@@ -124,7 +124,7 @@
      * @param callBack 加载完成后的回调函数
      */
     LazyLoad.prototype.script = function (file, callBack) {
-        var script, _this = this;
+        var script;
         if (! window.loadedScriptList[file]) {
             script = document.createElement("script");
             script.type = "text/javascript";
