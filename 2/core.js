@@ -180,27 +180,30 @@
                     return  new XMLHttpRequest();
                 }
             },
-                todo: function (url, json, callback, errback, method, isEval) {
-                    var xmlHttp = e.init(), param = e.parseBuild(json);
+                todo: function (params) {
+
+                    params.sync = ( typeof(params.sync) === "boolean" ) ? params.sync : true;
+                    var xmlHttp = e.init(), param = e.parseBuild(params.json);
                     xmlHttp.onreadystatechange = todo;
-                    if (method === "post") {
-                        xmlHttp.open(method.toLowerCase(), url, true);
+                    if (params.method === "post") {
+                        xmlHttp.open(params.method.toLowerCase(), params.url, true);
                         xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    } else if (method.toLowerCase() === "get") {
-                        url += e._link(url) + param;
+                    } else if (params.method.toLowerCase() === "get") {
+                        params.url += e._link(params.url) + param;
                         param = null;
-                        xmlHttp.open(method.toLowerCase(), url, true);
+                        //是否异步
+                        xmlHttp.open(params.method.toLowerCase(), params.url, params.sync);
                     }
                     (param != null) ? xmlHttp.send(param) : xmlHttp.send();
                     function todo() {
 
-                        if (callback !== undefined && xmlHttp.readyState === 4) {
+                        if (params.callback !== undefined && xmlHttp.readyState === 4) {
                             if (xmlHttp.status === 200) {
                                 var data = xmlHttp.responseText;
-                                data = (isEval === true) ? eval("(" + data + ")") : data;
-                                callback(data);
-                            } else if (errback !== undefined) {
-                                errback();
+                                data = ( params.isEval === true) ? eval("(" + data + ")") : data;
+                                params.callback(data);
+                            } else if (params.errback !== undefined) {
+                                params.errback();
                             }
                         }
                     }
@@ -245,14 +248,41 @@
                 }
             };
             return {
+                /**
+                 * AJAX基础方法
+                 * @param params
+                 */
+                todo: function (params) {
+                    // {  url: url, json: json, callback: callback, errback: errback, method: method,  isEval: isEval, sync: sync  }
+                    e.todo(params);
+                },
                 get: function (url, json, callback, errback) {
-                    e.todo(url, json, callback, errback, "get");
+                    e.todo({
+                        url: url,
+                        json: json,
+                        callback: callback,
+                        errback: errback,
+                        method: "get"
+                    });
                 },
                 post: function (url, json, callback, errback) {
-                    e.todo(url, json, callback, errback, "post");
+                    e.todo({
+                        url: url,
+                        json: json,
+                        callback: callback,
+                        errback: errback,
+                        method: "post"
+                    });
                 },
                 getJson: function (url, json, callback, errback) {
-                    e.todo(url, json, callback, errback, "post", true);
+                    e.todo({
+                        url: url,
+                        json: json,
+                        callback: callback,
+                        errback: errback,
+                        method: "post",
+                        isEval: true
+                    });
                 },
                 jsonp: function (url, json, callback, server) {
                     e.jsonp(url, json, callback, server);
@@ -274,7 +304,7 @@
                     var cookies, result, regExp;
                     cookies = document.cookie.toString();
 //                  regExp = eval("/" + key + "=(.*?)([;]|$)/");
-                    regExp = eval("/\s?" + key + "=(.*?)([;]|$)/");
+                    regExp = new RegExp("\\s?" + key + "=(.*?)([;]|$)");
                     result = regExp.exec(cookies);
                     return (result != null) ? unescape(result[1]) : undefined;
                 },
