@@ -28,12 +28,12 @@
         parent = this.scene_box;
         scene = document.createElement("div");
         scene.id = this.appId;
-        scene.style.position = "relative";
+//        scene.style.position = "relative";
         mask = document.createElement("div");
+        mask.style.position = "relative";
         mask.id = this.appId + "_mask";
         scene.appendChild(mask);
         ((parent) ? parent : document.body).appendChild(scene);
-
     };
 
 
